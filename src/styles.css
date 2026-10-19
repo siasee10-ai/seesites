@@ -100,24 +100,40 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-    background-image: 
+    background-image:
       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(30, 58, 138, 0.25), transparent 70%),
       radial-gradient(ellipse 60% 40% at 90% 60%, rgba(26, 46, 92, 0.18), transparent 60%);
     background-attachment: fixed;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0.03em; font-weight: 300; }
-  :focus-visible { outline: 2px solid var(--clay); outline-offset: 3px; }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.03em;
+    font-weight: 300;
+  }
+  :focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+  }
 }
 
-@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
 
 .metallic-text {
   background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
@@ -133,15 +149,28 @@
 }
 
 .metallic-card {
-  background: radial-gradient(120% 120% at 50% 0%, rgba(28, 52, 107, 0.25) 0%, rgba(10, 19, 39, 0.85) 100%);
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(28, 52, 107, 0.25) 0%,
+    rgba(10, 19, 39, 0.85) 100%
+  );
   border: 1px solid rgba(203, 213, 225, 0.16);
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 10px 30px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .metallic-card-glow {
-  background: radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.22) 0%, rgba(12, 23, 49, 0.95) 100%);
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(37, 99, 235, 0.22) 0%,
+    rgba(12, 23, 49, 0.95) 100%
+  );
   border: 1px solid rgba(226, 232, 240, 0.35);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(148, 163, 184, 0.2), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 16px 40px -10px rgba(0, 0, 0, 0.7),
+    0 0 25px -5px rgba(148, 163, 184, 0.2),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .metallic-btn-primary {
@@ -149,12 +178,16 @@
   color: #070d1a;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 4px 14px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .metallic-btn-primary:hover {
   background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
-  box-shadow: 0 6px 20px 0 rgba(226, 232, 240, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 1);
+  box-shadow:
+    0 6px 20px 0 rgba(226, 232, 240, 0.25),
+    inset 0 1px 0 0 rgba(255, 255, 255, 1);
   transform: translateY(-1px);
 }
 
@@ -180,7 +213,10 @@
 }
 
 .spiral-card {
-  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
   transform-style: preserve-3d;
   will-change: transform, opacity, filter;
 }
@@ -200,11 +236,26 @@
   background: rgba(226, 232, 240, 0.45);
 }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
-.reveal.is-visible { opacity: 1; transform: none; }
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 /* Subtle Cinematic Film Grain Overlay */

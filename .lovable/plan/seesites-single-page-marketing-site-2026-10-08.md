@@ -3,11 +3,13 @@
 One long editorial homepage at `/`, built exactly to the brief. No made-up reviews, clients, stats or credentials.
 
 ## Look and feel
+
 - Monochrome: off-white and soft white backgrounds, near-black text, charcoal sections, warm-gray neutrals, one quiet accent (muted terracotta/espresso tone, used sparingly).
 - Typography: Geist-style premium sans (e.g. "Inter Tight" avoided — use "Manrope" for body and "Instrument Sans"/"General Sans"-like bold display for headings), huge H1 (72–110px desktop), scales down cleanly on mobile.
 - Thin borders, sparse rounded corners, subtle shadows, calm fade/slide reveals on scroll, gentle image zoom on hover. Respects reduced-motion.
 
 ## Sections (top to bottom)
+
 1. Sticky minimal nav (Services, Pricing, Work, Process, FAQ, Contact) + "Start Your Website" button; mobile menu.
 2. Hero — "Your restaurant deserves to be seen." with both CTAs and a collage of restaurant website mockups (generated images).
 3. Trust strip — "Clear pricing. Clear process. No unnecessary complexity." plus the trust points.
@@ -25,17 +27,22 @@ One long editorial homepage at `/`, built exactly to the brief. No made-up revie
 15. Footer — nav, email, © 2026 SeeSites. No social links.
 
 ## Enquiry form
+
 "Start Your Website" and the "Choose [plan]" buttons scroll to a short form (name, email, restaurant/café name, city, chosen plan, message). Plan buttons preselect the plan.
+
 - Every enquiry is saved in Lovable Cloud so none get lost; you can view them in Cloud → Database → enquiries.
 - Email alerts to seesites0@gmail.com need a verified domain you own — can be added later.
 
 ## Images
+
 Generated: hero mockup collage, 5 concept site previews, 3 atmosphere concepts. Food/restaurant imagery, no fake brand names.
 
 ## SEO and accessibility
+
 Unique title/description/social tags targeting restaurant & café website design (USA/Canada), one H1, semantic sections, alt text, visible focus states, labeled form fields.
 
 ## Technical details
+
 - Rewrite `src/routes/index.tsx`; section components under `src/components/site/`; tokens + fonts in `src/styles.css` / `__root.tsx` head.
 - Enable Lovable Cloud; `enquiries` table with RLS (no public read), insert via a validated (zod) server function with basic rate limiting.
 - IntersectionObserver-based reveal hook; no heavy animation library.

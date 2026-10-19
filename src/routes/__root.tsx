@@ -78,9 +78,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SEESITES® — Digital Experiences That Feel Alive" },
-      { name: "description", content: "Independent digital designer creating distinctive websites, digital experiences and visual identities." },
-      { name: "author", content: "SEESITES" },
+      { title: "SeeSites — Premium Website Design Studio for Cafés & Restaurants" },
+      {
+        name: "description",
+        content:
+          "Custom digital experiences for independent cafés, coffee shops, bakeries, and restaurants in the United States and Canada. Operated by Sia.",
+      },
+      { name: "author", content: "SeeSites" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

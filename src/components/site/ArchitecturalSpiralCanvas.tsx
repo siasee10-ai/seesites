@@ -31,7 +31,7 @@ export function ArchitecturalSpiralCanvas({
       50,
       window.innerWidth / window.innerHeight,
       0.1,
-      900
+      900,
     );
     camera.position.set(0, 48, 26);
 
@@ -90,7 +90,13 @@ export function ArchitecturalSpiralCanvas({
     const radialSegments = isMobile ? 8 : 16;
 
     // Primary Monumental Metallic Silver Ribbon
-    const ribbonGeo = new THREE.TubeGeometry(curve, tubeSegments, tubeRadius, radialSegments, false);
+    const ribbonGeo = new THREE.TubeGeometry(
+      curve,
+      tubeSegments,
+      tubeRadius,
+      radialSegments,
+      false,
+    );
     const ribbonMat = new THREE.MeshStandardMaterial({
       color: 0xd8e0ea, // Polished Metallic Silver
       roughness: 0.18, // High Specular Reflection
@@ -200,7 +206,7 @@ export function ArchitecturalSpiralCanvas({
 
     // 7. Slow, Elegant & Controlled Camera Motion Loop
     let animationFrameId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -243,17 +249,13 @@ export function ArchitecturalSpiralCanvas({
       targetCamPos.set(
         Math.cos(camAngle) * camRadius + mouseX * (isMobile ? 1 : 2.2),
         camHeight - mouseY * (isMobile ? 1 : 2.2),
-        Math.sin(camAngle) * camRadius + (1 - p) * 10
+        Math.sin(camAngle) * camRadius + (1 - p) * 10,
       );
 
       const lookAngle = (p + 0.08) * Math.PI * 3.6 + 0.35;
       const lookHeight = 40 - (p + 0.08) * 120;
 
-      targetLookAt.set(
-        Math.cos(lookAngle) * 5.5,
-        lookHeight,
-        Math.sin(lookAngle) * 5.5
-      );
+      targetLookAt.set(Math.cos(lookAngle) * 5.5, lookHeight, Math.sin(lookAngle) * 5.5);
 
       currentCamPos.lerp(targetCamPos, 0.05);
       currentLookAt.lerp(targetLookAt, 0.05);
@@ -264,7 +266,7 @@ export function ArchitecturalSpiralCanvas({
       silverRimLight.position.set(
         currentCamPos.x * 0.5,
         currentCamPos.y + 3,
-        currentCamPos.z * 0.5
+        currentCamPos.z * 0.5,
       );
 
       renderer.render(scene, camera);
