@@ -114,6 +114,7 @@
     overflow-x: hidden;
     background-image:
       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(30, 58, 138, 0.25), transparent 70%),
+      radial-gradient(ellipse 50% 35% at 85% 15%, rgba(244, 114, 182, 0.07), transparent 60%),
       radial-gradient(ellipse 60% 40% at 90% 60%, rgba(26, 46, 92, 0.18), transparent 60%);
     background-attachment: fixed;
   }
@@ -141,10 +142,23 @@
   -webkit-text-fill-color: transparent;
 }
 
+.metallic-text-pink {
+  background: linear-gradient(180deg, #ffffff 0%, #fce7f3 45%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .metallic-pill {
   background: linear-gradient(135deg, rgba(241, 245, 249, 0.08) 0%, rgba(148, 163, 184, 0.03) 100%);
   border: 1px solid rgba(226, 232, 240, 0.2);
   color: #e2e8f0;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.pink-pill {
+  background: rgba(244, 114, 182, 0.08);
+  border: 1px solid rgba(244, 114, 182, 0.3);
+  color: #fbcfe8;
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
 }
 
@@ -170,6 +184,19 @@
   box-shadow:
     0 16px 40px -10px rgba(0, 0, 0, 0.7),
     0 0 25px -5px rgba(148, 163, 184, 0.2),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.metallic-card-pink {
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(244, 114, 182, 0.14) 0%,
+    rgba(12, 23, 49, 0.95) 100%
+  );
+  border: 1px solid rgba(249, 168, 212, 0.35);
+  box-shadow:
+    0 16px 40px -10px rgba(0, 0, 0, 0.7),
+    0 0 25px -5px rgba(244, 114, 182, 0.16),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 

@@ -30,7 +30,7 @@ const businessTypes = [
 export type BusinessTypeOption = (typeof businessTypes)[number];
 
 const fieldClasses =
-  "w-full rounded-xl border border-slate-400/20 bg-[#091326]/80 px-4 py-3 text-sm sm:text-base text-slate-100 placeholder:text-slate-500 focus:border-slate-200 focus:bg-[#0d1b36] focus:outline-none focus:ring-1 focus:ring-slate-300/40 transition-all";
+  "w-full rounded-xl border border-slate-400/20 bg-[#091326]/80 px-4 py-3.5 text-sm sm:text-base text-slate-100 placeholder:text-slate-500 focus:border-pink-300/60 focus:bg-[#0d1830] focus:outline-none focus:ring-1 focus:ring-pink-300/40 transition-all";
 
 export function EnquiryForm() {
   const [selectedPackage, setSelectedPackage] = useState<PackageOption>("Signature — ₹19,999");
@@ -396,15 +396,15 @@ export function EnquiryForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="metallic-btn-primary inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-8 py-3.5 text-xs font-bold tracking-[0.18em] uppercase transition-all disabled:opacity-50"
+            className="metallic-btn-pink inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full px-8 py-3.5 text-xs font-bold tracking-[0.18em] uppercase transition-all disabled:opacity-50"
           >
-            <Send className="h-3.5 w-3.5" />
-            <span>
+            <Send className="h-3.5 w-3.5 text-slate-900" />
+            <span className="text-slate-950">
               {status === "sending" ? "Sending Project Enquiry…" : "Send Project Enquiry"}
             </span>
           </button>
           <div className="text-xs font-mono text-slate-400 flex flex-wrap items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="h-2 w-2 rounded-full bg-pink-400 shadow-[0_0_8px_rgba(244,114,182,0.8)]" />
             <span>Direct to seesites0@gmail.com · Response in 24 business hours</span>
           </div>
         </div>
