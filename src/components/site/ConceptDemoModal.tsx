@@ -9,16 +9,21 @@ import {
   MapPin,
   CheckCircle2,
   ChevronRight,
+  Sparkles,
   Phone,
+  Scissors,
+  ShoppingBag,
+  Stethoscope,
+  Coffee,
+  Compass,
 } from "lucide-react";
-import lunaImg from "@/assets/project-luna.jpg";
-import noirImg from "@/assets/project-noir-cafe.jpg";
-import mesaImg from "@/assets/project-mesa.jpg";
-import fineDiningImg from "@/assets/fine-dining.jpg";
-import coffeeImg from "@/assets/coffee.jpg";
-import cafeImg from "@/assets/cafe.jpg";
+import auraImg from "@/assets/project-aura-salon.jpg";
+import vaaniImg from "@/assets/project-vaani-boutique.jpg";
+import aestheticaImg from "@/assets/project-aesthetica-clinic.jpg";
+import studioImg from "@/assets/project-studio-interior.jpg";
+import artisanImg from "@/assets/project-noir-cafe.jpg";
 
-export type ProjectId = "luna" | "noir" | "mesa";
+export type ProjectId = "aura" | "vaani" | "aesthetica" | "artisan" | "studio";
 
 interface ConceptDemoModalProps {
   projectId: ProjectId | null;
@@ -28,10 +33,15 @@ interface ConceptDemoModalProps {
 
 export function ConceptDemoModal({ projectId, onClose, onSelectProject }: ConceptDemoModalProps) {
   const [deviceView, setDeviceView] = useState<"desktop" | "mobile">("desktop");
-  const [activeTab, setActiveTab] = useState<string>("menu");
-  const [bookingGuests, setBookingGuests] = useState("2 Guests");
-  const [bookingTime, setBookingTime] = useState("7:30 PM");
+  const [activeTab, setActiveTab] = useState<number>(0);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [selectedService, setSelectedService] = useState("");
+  const [selectedTime, setSelectedTime] = useState("11:30 AM");
+
+  useEffect(() => {
+    setActiveTab(0);
+    setBookingConfirmed(false);
+  }, [projectId]);
 
   // Close on Escape key
   useEffect(() => {
@@ -50,522 +60,662 @@ export function ConceptDemoModal({ projectId, onClose, onSelectProject }: Concep
 
   if (!projectId) return null;
 
-  const data = {
-    luna: {
-      name: "LUNA",
-      badge: "Concept Project · Fine Dining & Contemporary Restaurant",
-      city: "Soho, New York",
+  const dataMap = {
+    aura: {
+      name: "AURA LUXURY SALON",
+      industry: "Beauty & Salons",
+      badge: "Concept Project · Luxury Salon & Nail Lounge",
+      city: "Bandra West, Mumbai",
       tagline:
-        "Intimate chiaroscuro lighting, custom dining typography, and seamless reservation integration.",
-      heroImg: lunaImg,
-      accentImg: fineDiningImg,
-      hours: "Tuesday – Sunday: 5:00 PM – 11:30 PM",
-      address: "142 Mercer Street, New York, NY 10012",
-      phone: "+1 (212) 555-0194",
-      tabs: ["Tasting Menu", "Cellar & Cocktails", "Atmosphere", "Table Booking"],
-      recommendedPlan: "Signature ($500)",
-      menuCategories: [
+        "Sleek dark-mode aesthetic, treatment price lists, stylist profiles, and seamless appointment booking.",
+      heroImg: auraImg,
+      recommendedPlan: "Signature — ₹19,999",
+      tabs: [
+        "Treatments & Services",
+        "Salon Price Guide",
+        "Stylists & Ambience",
+        "Book Appointment",
+      ],
+      sections: [
         {
-          name: "First Course (Starters)",
+          title: "Signature Hair & Nail Rituals",
           items: [
             {
-              title: "Hokkaido Scallop Crudo",
-              desc: "Smoked dashi, finger lime, pickled sea radish, shiso oil",
-              price: "$28",
+              name: "Balayage & Couture Gloss",
+              desc: "Custom colour melt with organic bond builder & deep treatment",
+              price: "₹6,500",
             },
             {
-              title: "Charred Maitake & Bone Marrow",
-              desc: "Black garlic emulsion, toasted brioche, cured yolk",
-              price: "$24",
+              name: "Japanese Gel Nail Artistry",
+              desc: "Non-toxic structured gel with intricate hand-painted nail designs",
+              price: "₹2,800",
             },
             {
-              title: "Stracciatella & Heirloom Persimmon",
-              desc: "Wild thyme honey, crispy buckwheat, aged balsamico",
-              price: "$22",
+              name: "Keratin Infusion Therapy",
+              desc: "Formaldehyde-free smoothing ritual with argan oil nourishment",
+              price: "₹5,200",
+            },
+            {
+              name: "Hydra-Luxe Scalp Detox",
+              desc: "Micro-mist exfoliation, lymphatic massage, and organic herbal rinse",
+              price: "₹3,400",
             },
           ],
         },
         {
-          name: "Main Course (Mains)",
+          title: "Complete Salon Menu Guide",
           items: [
             {
-              title: "Dry-Aged Duck Breast",
-              desc: "Spiced quince purée, fermented endive, duck jus with elderberry",
-              price: "$48",
+              name: "Precision Creative Haircut & Blowout",
+              desc: "Senior master stylist consultation, wash & signature blow dry",
+              price: "₹1,800",
             },
             {
-              title: "Wild Turbot in Fig Leaf",
-              desc: "Charred leek velouté, sea coriander, chanterelle mushrooms",
-              price: "$52",
+              name: "Express Mani-Pedi Duo",
+              desc: "Cuticle care, sea salt scrub, organic polish & paraffin wrap",
+              price: "₹2,200",
             },
             {
-              title: "A5 Miyazaki Wagyu Striploin",
-              desc: "Smoked potato mousseline, charred alliums, périgord truffle",
-              price: "$78",
+              name: "Bridal Hair & Makeup Preview",
+              desc: "Trial consultation, customized look curation & accessory setting",
+              price: "₹8,500",
+            },
+            {
+              name: "24K Gold Radiance Facial",
+              desc: "Ultrasonic deep cleanse, pure gold sheet infusion, face lift massage",
+              price: "₹4,900",
             },
           ],
         },
         {
-          name: "Dessert & Infusions",
+          title: "Master Artists & Ambience",
           items: [
             {
-              title: "Smoked Dark Chocolate Tart",
-              desc: "Single-origin 72% cacao, smoked sea salt, roasted malt ice cream",
-              price: "$18",
+              name: "Rhea Sen",
+              desc: "Creative Director · 12 years editorial styling in Mumbai & London",
+              price: "Senior Master",
             },
             {
-              title: "Yuzu & White Peach Sorbet",
-              desc: "Shiso granita, puffed wild rice, elderflower crisp",
-              price: "$16",
+              name: "Kunal Verma",
+              desc: "Master Nail Artist · Certified Japanese nail art specialist",
+              price: "Lead Tech",
+            },
+            {
+              name: "Pooja Mehta",
+              desc: "Senior Aesthetician · Skin therapy & holistic glow specialist",
+              price: "Lead Therapist",
             },
           ],
         },
       ],
     },
-    noir: {
-      name: "NOIR",
-      badge: "Concept Project · Specialty Coffee Shop & Slow Bar",
-      city: "Queen Street West, Toronto",
+    vaani: {
+      name: "VAANI PRET & COUTURE",
+      industry: "Fashion & Boutiques",
+      badge: "Concept Project · Contemporary Indian Atelier",
+      city: "Mehrauli, New Delhi",
       tagline:
-        "Brushed silver espresso architecture, daily batch digital menus, and pour-over storytelling.",
-      heroImg: noirImg,
-      accentImg: coffeeImg,
-      hours: "Monday – Friday: 7:00 AM – 5:00 PM | Sat – Sun: 8:00 AM – 6:00 PM",
-      address: "842 Queen Street West, Toronto, ON M6J 1G3",
-      phone: "+1 (416) 555-0182",
-      tabs: ["Espresso & Pour-Over", "Pastries & Toast", "Beans by Origin", "Visit Bar"],
-      recommendedPlan: "Essential ($200)",
-      menuCategories: [
+        "Editorial digital storefront for modern Indian fashion, showcasing heritage handlooms with contemporary silhouettes.",
+      heroImg: vaaniImg,
+      recommendedPlan: "Signature — ₹19,999",
+      tabs: [
+        "Current Collection",
+        "Heritage Textiles",
+        "Editorial Lookbook",
+        "Private Atelier Visit",
+      ],
+      sections: [
         {
-          name: "Single-Origin Pour-Overs (Filter)",
+          title: "The Autumn / Festive Edit",
           items: [
             {
-              title: "Ethiopia Guji Uraga (Washed)",
-              desc: "Jasmine blossom, candied bergamot, peach nectar, sparkling acidity",
-              price: "$6.50",
+              name: "Noor Chanderi Tissue Lehenga",
+              desc: "Hand-embroidered zardozi work with scalloped raw silk blouse",
+              price: "₹48,000",
             },
             {
-              title: "Colombia Finca El Paraiso (Thermal Shock)",
-              desc: "Wild strawberry compote, lemongrass, creamy white cocoa finish",
-              price: "$7.50",
+              name: "Kashmiri Aari Silk Kurta Set",
+              desc: "Pure mulberry silk with antique gold thread work and farshi salwar",
+              price: "₹24,500",
             },
             {
-              title: "Kenya Nyeri Hill (Double Fermented)",
-              desc: "Blackcurrant cordial, grapefruit zest, cane sugar sweetness",
-              price: "$7.00",
+              name: "Ivory Organza Overlay Jacket",
+              desc: "Hand-cut mirror accents with handwoven banarasi tissue inner",
+              price: "₹18,900",
+            },
+            {
+              name: "Charcoal Structured Bandhgala",
+              desc: "Italian wool blend tailored with handcrafted antique silver buttons",
+              price: "₹32,000",
             },
           ],
         },
         {
-          name: "Espresso & Milk Bar",
+          title: "Craft & Artisan Narrative",
           items: [
             {
-              title: "Seasonal Espresso Double",
-              desc: "Rotating single origin pulled on Synesso MVP",
-              price: "$4.00",
+              name: "Banaras Weaves",
+              desc: "Direct collaboration with 4th-generation master weavers in Varanasi",
+              price: "Pure Katan",
             },
             {
-              title: "Cortado / Piccolo (1:1 Ratio)",
-              desc: "Velvety steamed microfoam, oat or organic whole milk",
-              price: "$4.75",
+              name: "Chanderi Handloom",
+              desc: "Featherweight cotton-silk spun by women artisans in Madhya Pradesh",
+              price: "Zari Edge",
             },
             {
-              title: "Smoked Vanilla Cardamom Latte",
-              desc: "House-steeped crushed green cardamom, raw bourbon vanilla",
-              price: "$6.25",
+              name: "Zardozi & Dabka",
+              desc: "Intricate metallic needlework preserved by Old Delhi craftspeople",
+              price: "Handstitched",
             },
           ],
         },
         {
-          name: "Bakery & Morning Provisions",
+          title: "Boutique Experience & Press",
           items: [
             {
-              title: "Nordic Cardamom Bun",
-              desc: "Slow fermented sourdough enriched dough, crushed pearl sugar",
-              price: "$5.50",
+              name: "Bespoke Bridal Consultations",
+              desc: "Private 90-minute design session with founder designer",
+              price: "By Appointment",
             },
             {
-              title: "Matcha Sesame Kouign-Amann",
-              desc: "Caramelized French butter pastry, Uji matcha glaze",
-              price: "$6.00",
+              name: "Worldwide Doorstep Fitting",
+              desc: "Personalized measurement verification for global NRI clients",
+              price: "Express Logistics",
+            },
+            {
+              name: "Sustainable Dye Program",
+              desc: "100% AZO-free plant-based colors used in all signature collections",
+              price: "Eco Certified",
             },
           ],
         },
       ],
     },
-    mesa: {
-      name: "MESA",
-      badge: "Concept Project · Contemporary Woodfire & Pacific Northwest",
-      city: "Gastown, Vancouver",
+    aesthetica: {
+      name: "AESTHETICA CLINIC",
+      industry: "Healthcare & Clinics",
+      badge: "Concept Project · Aesthetic Dental & Wellness",
+      city: "Indiranagar, Bengaluru",
       tagline:
-        "Monolithic twilight Pacific views, multi-course woodfire presentations, and mobile table bookings.",
-      heroImg: mesaImg,
-      accentImg: cafeImg,
-      hours: "Wednesday – Sunday: 5:00 PM – Midnight",
-      address: "210 Water Street, Vancouver, BC V6B 1B5",
-      phone: "+1 (604) 555-0128",
-      tabs: ["Woodfire Dining", "Pacific Oyster Bar", "Natural Wines", "Table Booking"],
-      recommendedPlan: "Experience ($800)",
-      menuCategories: [
+        "Clean, high-credibility healthcare website featuring treatment guides, doctor credentials, and convenient consultation enquiries.",
+      heroImg: aestheticaImg,
+      recommendedPlan: "Signature — ₹19,999",
+      tabs: [
+        "Treatments & Services",
+        "Doctor Credentials",
+        "Clinic Technology",
+        "Book Consultation",
+      ],
+      sections: [
         {
-          name: "Raw Bar & Coastal Starters",
+          title: "Advanced Dental & Cosmetic Services",
           items: [
             {
-              title: "Pacific Kusshi Oysters (Half Dozen)",
-              desc: "Apple cider granita, pickled shallot, bull kelp mignonette",
-              price: "$26",
+              name: "Invisible Clear Aligners",
+              desc: "AI-guided 3D smile planning with German biocompatible aligners",
+              price: "Custom Quote",
             },
             {
-              title: "Haida Gwaii Halibut Crudo",
-              desc: "Sea buckthorn emulsion, charred kombu oil, toasted pine nuts",
-              price: "$24",
+              name: "Laser Teeth Whitening",
+              desc: "Pain-free 45-minute clinic session brightening up to 6 shades",
+              price: "₹8,500",
             },
             {
-              title: "Wood-Charred Spot Prawns",
-              desc: "Smoked chili butter, grilled sourdough, Meyer lemon",
-              price: "$28",
+              name: "Single-Day Dental Implants",
+              desc: "Guided surgical precision with lifetime warranty Swiss titanium implants",
+              price: "Consultation",
+            },
+            {
+              name: "Porcelain Ceramic Veneers",
+              desc: "Ultra-thin hand-layered ceramics tailored to natural facial symmetry",
+              price: "Per Tooth",
             },
           ],
         },
         {
-          name: "From the Alder Woodfire Hearth",
+          title: "Medical Faculty & Qualifications",
           items: [
             {
-              title: "Pacific King Salmon",
-              desc: "Charred over western red cedar, birch glaze, braised sea greens",
-              price: "$46",
+              name: "Dr. Arvind Rao, MDS",
+              desc: "Consultant Prosthodontist & Implantologist · 16 years clinical excellence",
+              price: "BDS, MDS (Oral Surg)",
             },
             {
-              title: "45-Day Dry Aged Brant Lake Wagyu",
-              desc: "Roasted marrow jus, smoked wild chanterelles, cipollini onions",
-              price: "$68",
+              name: "Dr. Suniti Nair, BDS",
+              desc: "Aesthetic Dentistry Fellow (Germany) · Certified Smile Architect",
+              price: "Fellowship (Munich)",
             },
             {
-              title: "Charred King Oyster Mushrooms",
-              desc: "Fermented garlic puree, pickled fiddleheads, pine needle smoke",
-              price: "$32",
+              name: "Dr. Farhan Qureshi",
+              desc: "Microscopic Endodontist · Pain-free laser root canal therapy",
+              price: "MDS (Cons Dent)",
             },
           ],
         },
         {
-          name: "Pacific Cellar & Cocktails",
+          title: "Patient Care Standards",
           items: [
             {
-              title: "Okanagan Valley Pet-Nat Natural Wine",
-              desc: "Crisp elderflower, crisp pear, fine mineral finish",
-              price: "$18 / gls",
+              name: "Class-B Hospital Autoclave Sterilization",
+              desc: "Strict 7-tier hygiene protocol surpassing international NABH standards",
+              price: "100% Sterile",
             },
             {
-              title: "Smoked Douglas Fir Negroni",
-              desc: "Locally foraged cedar gin, sweet vermouth, smoked bitter orange",
-              price: "$19",
+              name: "Digital OPG & 3D Intraoral Scanning",
+              desc: "No messy impression trays; instantaneous high-definition 3D rendering",
+              price: "Low Radiation",
+            },
+            {
+              name: "Transparent Pre-Treatment Estimates",
+              desc: "Comprehensive cost transparency with zero unexpected post-op charges",
+              price: "Fixed Pricing",
             },
           ],
         },
       ],
     },
-  }[projectId];
+    artisan: {
+      name: "THE ARTISAN ROASTERS",
+      industry: "Restaurants & Cafés",
+      badge: "Concept Project · Specialty Coffee & Kitchen",
+      city: "Kala Ghoda, Mumbai",
+      tagline:
+        "Atmospheric culinary layout featuring interactive digital menus, roastery origins, and table reservation simulator.",
+      heroImg: artisanImg,
+      recommendedPlan: "Essential — ₹9,999",
+      tabs: ["Roast & Brew Menu", "Small Plates Kitchen", "Origin & Philosophy", "Reserve A Table"],
+      sections: [
+        {
+          title: "Specialty Pour Overs & Cold Brews",
+          items: [
+            {
+              name: "Ratnagiri Estate Washed Pour Over",
+              desc: "Notes of jasmine, Meyer lemon, and wild mountain wildflower honey",
+              price: "₹280",
+            },
+            {
+              name: "Cascara Sparkling Cold Brew",
+              desc: "Coffee cherry tea tonic infused with orange peel and fresh rosemary",
+              price: "₹260",
+            },
+            {
+              name: "Cortado on Oat M*lk",
+              desc: "Double ristretto pull of our signature medium-roast Chikmagalur beans",
+              price: "₹240",
+            },
+            {
+              name: "Single-Origin Espresso Flight",
+              desc: "Tasting duo of light roast washed vs honey processed micro-lots",
+              price: "₹340",
+            },
+          ],
+        },
+        {
+          title: "Sourdough & Artisanal Bakery",
+          items: [
+            {
+              name: "Avocado & Stracciatella Tartine",
+              desc: "House sourdough, crushed hass avo, cold pressed olive oil, micro greens",
+              price: "₹420",
+            },
+            {
+              name: "Truffled Wild Mushroom Toast",
+              desc: "Thyme-sautéed shimeji, portobello, garlic emulsion on seeded rye",
+              price: "₹460",
+            },
+            {
+              name: "Sea Salt Dark Chocolate Cruffin",
+              desc: "Flaky laminated pastry filled with single-origin Valrhona ganache",
+              price: "₹240",
+            },
+          ],
+        },
+        {
+          title: "Farm to Cup Provenance",
+          items: [
+            {
+              name: "Direct Trade with Indian Estates",
+              desc: "Sourcing strictly from altitude-rich micro-farms in Coorg & Araku Valley",
+              price: "Ethical Trade",
+            },
+            {
+              name: "In-House Loring Smart Roaster",
+              desc: "Eco-friendly zero-emissions roasting calibrated for clean flavor clarity",
+              price: "Batch Roasted",
+            },
+            {
+              name: "Barista Training Academy",
+              desc: "Weekend sensory coffee cupping and home brewing workshops",
+              price: "Community First",
+            },
+          ],
+        },
+      ],
+    },
+    studio: {
+      name: "STUDIO ELEMENT",
+      industry: "Professional & Architecture",
+      badge: "Concept Project · Architecture & Interiors",
+      city: "Jubilee Hills, Hyderabad",
+      tagline:
+        "Minimalist, editorial architecture showcase highlighting residential case studies, materials, and consultation enquiry.",
+      heroImg: studioImg,
+      recommendedPlan: "Signature — ₹19,999",
+      tabs: ["Selected Projects", "Material Palette", "Design Ethos", "Consultation"],
+      sections: [
+        {
+          title: "Residential & Commercial Works",
+          items: [
+            {
+              name: "The Concrete Pavilions (Jubilee Hills)",
+              desc: "5,800 sq.ft brutalist private villa framed by courtyard water bodies",
+              price: "Completed 2025",
+            },
+            {
+              name: "Oasis Penthouse (Gachibowli)",
+              desc: "Minimalist Japandi penthouse with custom teak joinery and limewash",
+              price: "Completed 2024",
+            },
+            {
+              name: "Artisans Workspace (Banjara Hills)",
+              desc: "Creative studio and gallery space repurposed from heritage stone stable",
+              price: "Completed 2025",
+            },
+          ],
+        },
+        {
+          title: "Sustainable Material Selection",
+          items: [
+            {
+              name: "Locally Sourced Basalt & Slate",
+              desc: "Quarried naturally within Telangana to minimize transportation carbon",
+              price: "Regional Stone",
+            },
+            {
+              name: "Reclaimed Burmese Teak",
+              desc: "Salvaged architectural timber restored by generational carpenters",
+              price: "Circular Design",
+            },
+            {
+              name: "Breathable Lime Plasters",
+              desc: "Non-toxic thermal plaster walls reducing reliance on mechanical air cooling",
+              price: "Passive Climate",
+            },
+          ],
+        },
+        {
+          title: "Studio Credentials",
+          items: [
+            {
+              name: "Principal Architect: Vikram Reddy",
+              desc: "B.Arch (SPA Delhi), M.Arch (CEPT Ahmedabad) · Registered COA",
+              price: "14 Yrs Practice",
+            },
+            {
+              name: "Design Director: Tanya Kapoor",
+              desc: "Interior Architecture Specialist (Pratt Institute, NY)",
+              price: "Principal Interior",
+            },
+            {
+              name: "Turnkey Project Execution",
+              desc: "End-to-end site supervision, vendor management and timeline guarantee",
+              price: "Full Lifecycle",
+            },
+          ],
+        },
+      ],
+    },
+  };
+
+  const project = dataMap[projectId];
+  const isBookingTab = activeTab === project.tabs.length - 1;
 
   return (
-    <div className="fixed inset-0 z-[120] flex flex-col bg-[#02050f]/95 backdrop-blur-2xl text-slate-100 overflow-y-auto">
-      {/* Top Bar / Controls */}
-      <div className="sticky top-0 z-20 flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#04091a]/90 px-4 py-3 md:px-8">
-        <div className="flex items-center gap-3">
-          <span className="font-editorial text-lg md:text-xl font-light tracking-wide text-white">
-            {data.name}
-          </span>
-          <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-0.5 text-[10px] font-mono uppercase tracking-wider text-emerald-300">
-            {data.badge}
-          </span>
-        </div>
-
-        {/* Viewport Switcher & Actions */}
-        <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center rounded-lg border border-white/10 bg-white/5 p-0.5 text-xs font-mono">
-            <button
-              onClick={() => setDeviceView("desktop")}
-              className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors ${
-                deviceView === "desktop"
-                  ? "bg-white text-slate-950 font-semibold"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              <Monitor className="h-3.5 w-3.5" />
-              <span>Desktop</span>
-            </button>
-            <button
-              onClick={() => setDeviceView("mobile")}
-              className={`inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 transition-colors ${
-                deviceView === "mobile"
-                  ? "bg-white text-slate-950 font-semibold"
-                  : "text-slate-300 hover:text-white"
-              }`}
-            >
-              <Smartphone className="h-3.5 w-3.5" />
-              <span>Mobile View</span>
-            </button>
+    <div className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 md:p-8 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200">
+      <div className="relative w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl border border-white/20 bg-[#060e22] text-slate-100 shadow-2xl custom-scrollbar flex flex-col">
+        {/* Top Floating Control Bar */}
+        <div className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-[#060e22]/95 px-4 py-3 sm:px-6 backdrop-blur-md">
+          <div className="flex items-center gap-3">
+            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-300">
+              Interactive Concept Demo
+            </span>
           </div>
 
-          <button
-            onClick={() => {
-              onClose();
-              onSelectProject(data.recommendedPlan);
-            }}
-            className="metallic-btn-primary inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider uppercase shadow-md"
-          >
-            <span>Get A Site Like This</span>
-            <ChevronRight className="h-3.5 w-3.5" />
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Device Toggle */}
+            <div className="hidden sm:flex items-center rounded-lg border border-white/15 bg-white/5 p-1 text-xs font-mono text-slate-400">
+              <button
+                onClick={() => setDeviceView("desktop")}
+                className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] transition-colors ${
+                  deviceView === "desktop"
+                    ? "bg-white text-slate-950 font-bold"
+                    : "hover:text-white"
+                }`}
+              >
+                <Monitor className="h-3 w-3" />
+                <span>Desktop</span>
+              </button>
+              <button
+                onClick={() => setDeviceView("mobile")}
+                className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-[11px] transition-colors ${
+                  deviceView === "mobile" ? "bg-white text-slate-950 font-bold" : "hover:text-white"
+                }`}
+              >
+                <Smartphone className="h-3 w-3" />
+                <span>Mobile</span>
+              </button>
+            </div>
 
-          <button
-            onClick={onClose}
-            aria-label="Close demo"
-            className="rounded-full border border-white/20 p-2 text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
-          >
-            <X className="h-4 w-4" />
-          </button>
+            <button
+              onClick={onClose}
+              aria-label="Close demo"
+              className="rounded-full border border-white/20 bg-white/5 p-2 text-slate-300 hover:bg-white/10 hover:text-white transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Demo Container */}
-      <div className="flex-1 p-3 sm:p-6 md:p-10 flex justify-center items-start">
-        <div
-          className={`w-full transition-all duration-300 ${
-            deviceView === "mobile"
-              ? "max-w-[420px] rounded-[36px] border-[6px] border-slate-700/80 shadow-2xl overflow-hidden bg-[#070e1f] my-4"
-              : "max-w-5xl rounded-2xl border border-white/15 shadow-2xl overflow-hidden bg-[#070e1f]"
-          }`}
-        >
-          {/* Simulated Browser Bar (Desktop only) */}
-          {deviceView === "desktop" && (
-            <div className="flex items-center justify-between border-b border-white/10 bg-[#050b18] px-4 py-2.5 text-[11px] font-mono text-slate-400">
-              <div className="flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-rose-500/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+        {/* Modal Body Container with Simulated Viewport */}
+        <div className="p-4 sm:p-8 flex justify-center">
+          <div
+            className={`w-full transition-all duration-300 ${
+              deviceView === "mobile"
+                ? "max-w-md border-4 border-slate-700 rounded-3xl p-4 bg-[#030714] shadow-2xl"
+                : "max-w-4xl"
+            }`}
+          >
+            {/* Concept Project Notice Banner */}
+            <div className="mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-xl border border-emerald-400/25 bg-emerald-500/10 px-4 py-2.5 text-xs font-mono text-emerald-300">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                <span>{project.badge} · Custom Design Showcase by SeeSites</span>
               </div>
-              <div className="rounded-full border border-white/10 bg-white/5 px-6 py-0.5 text-slate-300 flex items-center gap-2">
-                <span className="text-emerald-400">https://</span>
-                <span>{projectId}.restaurant-experience.seesites.com</span>
-              </div>
-              <span className="text-[10px] text-slate-500">Live Staging Preview</span>
-            </div>
-          )}
-
-          {/* Restaurant Concept Website Header */}
-          <header className="border-b border-white/10 bg-[#050b18]/80 px-5 py-4 backdrop-blur-md flex items-center justify-between">
-            <div>
-              <span className="font-editorial text-xl md:text-2xl font-light tracking-[0.1em] text-white">
-                {data.name}
-              </span>
-              <span className="block text-[10px] font-mono tracking-widest text-slate-400 uppercase">
-                {data.city}
+              <span className="text-[10px] text-slate-400 uppercase tracking-wider">
+                {project.city}
               </span>
             </div>
 
-            <nav className="flex items-center gap-3 md:gap-6 text-[11px] font-mono tracking-wider uppercase text-slate-300">
-              {data.tabs.map((tab) => (
+            {/* Visual Hero Mockup */}
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/15 bg-black">
+              <img
+                src={project.heroImg}
+                alt={project.name}
+                className="h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#030714] via-[#030714]/40 to-transparent" />
+              <div className="absolute bottom-5 left-5 right-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-slate-300">
+                    {project.industry}
+                  </span>
+                  <h3 className="font-editorial text-2xl sm:text-4xl font-light text-white uppercase tracking-wider mt-0.5">
+                    {project.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-300 max-w-xl font-light leading-relaxed">
+                    {project.tagline}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Interactive Tab Switcher */}
+            <div className="mt-6 flex flex-wrap gap-2 border-b border-white/10 pb-3">
+              {project.tabs.map((tab, idx) => (
                 <button
                   key={tab}
                   onClick={() => {
-                    setActiveTab(tab.toLowerCase().includes("book") ? "booking" : "menu");
+                    setActiveTab(idx);
+                    setBookingConfirmed(false);
                   }}
-                  className={`hover:text-white transition-colors ${
-                    (activeTab === "booking" && tab.toLowerCase().includes("book")) ||
-                    (activeTab === "menu" && !tab.toLowerCase().includes("book"))
-                      ? "text-white underline underline-offset-4"
-                      : "text-slate-400"
+                  className={`rounded-full px-4 py-1.5 text-xs font-mono tracking-wider transition-all ${
+                    activeTab === idx
+                      ? "bg-white text-slate-950 font-bold shadow-md"
+                      : "border border-white/10 bg-white/5 text-slate-300 hover:border-white/20 hover:text-white"
                   }`}
                 >
                   {tab}
                 </button>
               ))}
-            </nav>
-          </header>
-
-          {/* Restaurant Concept Hero */}
-          <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden">
-            <img src={data.heroImg} alt={data.name} className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#070e1f] via-[#070e1f]/40 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <span className="text-[10px] font-mono tracking-[0.25em] text-slate-300 uppercase">
-                {data.city}
-              </span>
-              <h1 className="mt-1 font-editorial text-2xl sm:text-4xl md:text-5xl font-light uppercase text-white tracking-[0.05em]">
-                {data.name}
-              </h1>
-              <p className="mt-2 max-w-xl text-xs sm:text-sm text-slate-200/90 font-light">
-                {data.tagline}
-              </p>
             </div>
-          </div>
 
-          {/* Restaurant Fast Info Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10 border-y border-white/10 bg-[#050c1c] text-xs font-mono text-slate-300">
-            <div className="p-3.5 flex items-center gap-2">
-              <Clock className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-              <span className="truncate">{data.hours}</span>
-            </div>
-            <div className="p-3.5 flex items-center gap-2">
-              <MapPin className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-              <span className="truncate">{data.address}</span>
-            </div>
-            <div className="p-3.5 flex items-center gap-2">
-              <Phone className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-              <span className="truncate">{data.phone}</span>
-            </div>
-          </div>
-
-          {/* Interactive Content Body */}
-          <div className="p-6 md:p-10 space-y-12">
-            {activeTab === "booking" ? (
-              /* Simulated Live Booking / Reservation Flow */
-              <div className="max-w-xl mx-auto rounded-2xl border border-white/15 bg-[#091530] p-6 sm:p-8">
-                <div className="text-center mb-6">
-                  <h3 className="font-editorial text-2xl font-light text-white uppercase tracking-wider">
-                    Reserve a Table at {data.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-slate-400 font-mono">
-                    Instant online confirmation · Seamless dining experience
-                  </p>
-                </div>
-
-                {bookingConfirmed ? (
-                  <div className="rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-6 text-center space-y-3">
-                    <CheckCircle2 className="h-10 w-10 text-emerald-400 mx-auto" />
-                    <p className="text-base font-semibold text-white">Reservation Confirmed!</p>
-                    <p className="text-xs text-slate-300">
-                      Table reserved for <strong>{bookingGuests}</strong> at{" "}
-                      <strong>{bookingTime}</strong>. Confirmation sent via SMS.
-                    </p>
-                    <button
-                      onClick={() => setBookingConfirmed(false)}
-                      className="mt-4 text-xs font-mono text-emerald-300 hover:text-white underline underline-offset-4"
-                    >
-                      Book another table
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-4 text-xs font-mono">
-                    <div>
-                      <label className="block text-slate-400 mb-1.5">Guests</label>
-                      <div className="grid grid-cols-4 gap-2">
-                        {["1 Guest", "2 Guests", "4 Guests", "6+ Guests"].map((g) => (
-                          <button
-                            key={g}
-                            type="button"
-                            onClick={() => setBookingGuests(g)}
-                            className={`rounded-lg py-2 border text-center transition-colors ${
-                              bookingGuests === g
-                                ? "border-white bg-white text-slate-950 font-bold"
-                                : "border-white/15 bg-white/5 text-slate-300 hover:border-white/30"
-                            }`}
-                          >
-                            {g}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-slate-400 mb-1.5">Seating Time</label>
-                      <div className="grid grid-cols-3 gap-2">
-                        {["6:00 PM", "7:30 PM", "8:45 PM", "9:15 PM"].map((t) => (
-                          <button
-                            key={t}
-                            type="button"
-                            onClick={() => setBookingTime(t)}
-                            className={`rounded-lg py-2 border text-center transition-colors ${
-                              bookingTime === t
-                                ? "border-white bg-white text-slate-950 font-bold"
-                                : "border-white/15 bg-white/5 text-slate-300 hover:border-white/30"
-                            }`}
-                          >
-                            {t}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => setBookingConfirmed(true)}
-                      className="metallic-btn-primary w-full py-3 rounded-full font-semibold text-slate-950 tracking-wider uppercase mt-4"
-                    >
-                      Complete Reservation ({bookingGuests} · {bookingTime})
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              /* Interactive Menu Presentation */
-              <div>
-                <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-8">
-                  <div>
-                    <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                      Digital Hospitality Experience
-                    </span>
-                    <h2 className="font-editorial text-2xl sm:text-3xl font-light text-white uppercase tracking-wider">
-                      Current Seasonal Offerings
-                    </h2>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab("booking")}
-                    className="metallic-btn-ghost rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-wider"
-                  >
-                    Reserve Table →
-                  </button>
-                </div>
-
-                <div className="space-y-10">
-                  {data.menuCategories.map((cat) => (
-                    <div key={cat.name} className="space-y-4">
-                      <h3 className="font-editorial text-lg sm:text-xl font-light text-slate-200 uppercase tracking-wider border-b border-white/10 pb-2">
-                        {cat.name}
-                      </h3>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {cat.items.map((item) => (
-                          <div
-                            key={item.title}
-                            className="rounded-xl border border-white/10 bg-[#050c1a]/60 p-4 hover:border-white/20 transition-colors"
-                          >
-                            <div className="flex items-baseline justify-between gap-2">
-                              <h4 className="font-editorial text-base font-light text-white tracking-wide">
-                                {item.title}
-                              </h4>
-                              <span className="font-mono text-xs font-semibold text-slate-200">
-                                {item.price}
-                              </span>
-                            </div>
-                            <p className="mt-1.5 text-xs text-slate-400 font-light leading-relaxed">
-                              {item.desc}
-                            </p>
+            {/* Tab Content Display */}
+            <div className="mt-6">
+              {!isBookingTab ? (
+                <div>
+                  <h4 className="font-editorial text-xl font-light text-white uppercase tracking-wide mb-4">
+                    {project.sections[activeTab]?.title || project.tabs[activeTab]}
+                  </h4>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {project.sections[activeTab]?.items.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-xl border border-white/10 bg-white/5 p-4 flex flex-col justify-between hover:border-white/20 transition-all"
+                      >
+                        <div>
+                          <div className="flex items-start justify-between gap-2">
+                            <h5 className="font-medium text-sm text-white">{item.name}</h5>
+                            <span className="text-xs font-mono text-emerald-400 shrink-0 font-semibold">
+                              {item.price}
+                            </span>
                           </div>
-                        ))}
+                          <p className="mt-1.5 text-xs text-slate-400 font-light leading-relaxed">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                /* Interactive Booking / Enquiry Flow Simulator */
+                <div className="rounded-2xl border border-white/15 bg-white/5 p-6 text-center max-w-lg mx-auto">
+                  {!bookingConfirmed ? (
+                    <div>
+                      <h4 className="font-editorial text-2xl font-light text-white uppercase tracking-wide">
+                        Interactive Appointment & Enquiry Simulator
+                      </h4>
+                      <p className="mt-2 text-xs text-slate-300 font-light leading-relaxed">
+                        Test how easy it is for prospective clients to reach your business directly
+                        via WhatsApp or scheduled booking.
+                      </p>
+
+                      <div className="mt-5 space-y-3 text-left">
+                        <div>
+                          <label className="block text-[11px] font-mono text-slate-400 uppercase mb-1">
+                            Select Service / Inquiry Type
+                          </label>
+                          <select
+                            value={selectedService}
+                            onChange={(e) => setSelectedService(e.target.value)}
+                            className="w-full rounded-lg border border-white/15 bg-[#030714] px-3 py-2 text-xs text-white"
+                          >
+                            <option value="Consultation">Initial Consultation & Evaluation</option>
+                            <option value="Premium Service">Signature Experience Package</option>
+                            <option value="General Enquiry">General Business Enquiry</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-[11px] font-mono text-slate-400 uppercase mb-1">
+                            Preferred Time
+                          </label>
+                          <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+                            {["11:30 AM", "3:00 PM", "6:30 PM"].map((t) => (
+                              <button
+                                key={t}
+                                type="button"
+                                onClick={() => setSelectedTime(t)}
+                                className={`rounded-lg py-2 border ${
+                                  selectedTime === t
+                                    ? "border-emerald-400 bg-emerald-500/20 text-white font-bold"
+                                    : "border-white/10 text-slate-400 hover:text-white"
+                                }`}
+                              >
+                                {t}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => setBookingConfirmed(true)}
+                          className="metallic-btn-primary w-full mt-2 rounded-full py-3 text-xs font-bold uppercase tracking-wider text-slate-950"
+                        >
+                          Simulate Booking Confirmation →
+                        </button>
                       </div>
                     </div>
-                  ))}
+                  ) : (
+                    <div className="py-4">
+                      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-400/40 text-emerald-400 mb-3">
+                        <CheckCircle2 className="h-6 w-6" />
+                      </div>
+                      <h4 className="font-editorial text-2xl font-light text-white uppercase">
+                        Simulation Successful!
+                      </h4>
+                      <p className="mt-2 text-xs text-slate-300 font-light leading-relaxed">
+                        On your live custom website, this enquiry instantly routes to your official
+                        email and sends a pre-filled WhatsApp message directly to your phone.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => setBookingConfirmed(false)}
+                        className="mt-4 text-xs font-mono text-slate-400 underline"
+                      >
+                        Reset Simulator
+                      </button>
+                    </div>
+                  )}
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
 
-          {/* Concept Demo Footer Banner */}
-          <div className="border-t border-white/15 bg-[#030713] p-6 text-center">
-            <span className="text-xs font-mono uppercase tracking-widest text-slate-400 block mb-3">
-              Like what you see in {data.name}? We create custom digital homes tailored to your
-              restaurant.
-            </span>
-            <button
-              onClick={() => {
-                onClose();
-                onSelectProject(data.recommendedPlan);
-              }}
-              className="metallic-btn-primary inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider"
-            >
-              <span>Inquire About A Website for Your Venue</span>
-              <ChevronRight className="h-3.5 w-3.5" />
-            </button>
+            {/* Bottom Conversion Bar */}
+            <div className="mt-8 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="text-[10px] font-mono text-slate-400 uppercase">
+                  Tailored for Indian Businesses
+                </span>
+                <p className="text-xs text-slate-200">
+                  Like this layout? We build bespoke websites starting at ₹9,999.
+                </p>
+              </div>
+
+              <button
+                onClick={() => {
+                  onClose();
+                  onSelectProject(project.recommendedPlan);
+                }}
+                className="metallic-btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-lg"
+              >
+                <span>Get a Website Like This</span>
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -8,9 +8,12 @@ import {
   Layers,
   CreditCard,
   Sparkles,
+  ChevronRight,
+  Clock,
+  Key,
 } from "lucide-react";
 
-export type ModalType = "pricing" | "services" | "process" | "faq" | null;
+export type ModalType = "pricing" | "services" | "process" | "faq" | "terms" | "privacy" | null;
 
 interface InfoModalProps {
   type: ModalType;
@@ -36,9 +39,9 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
   if (!type) return null;
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6 md:p-10 bg-slate-950/80 backdrop-blur-xl animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center p-3 sm:p-6 md:p-10 bg-slate-950/85 backdrop-blur-xl animate-in fade-in duration-200">
       {/* Modal Card */}
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/20 bg-[#060e22] p-6 sm:p-10 text-slate-100 shadow-2xl custom-scrollbar">
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/20 bg-[#060e22] p-5 sm:p-10 text-slate-100 shadow-2xl custom-scrollbar">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -48,231 +51,311 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
           <X className="h-5 w-5" />
         </button>
 
-        {/* ===================== PRICING & MAINTENANCE MODAL ===================== */}
+        {/* ===================== PRICING & CARE PLANS MODAL ===================== */}
         {type === "pricing" && (
           <div className="space-y-10">
             <div>
               <span className="text-[11px] font-mono tracking-[0.25em] text-slate-400 uppercase">
-                Flat-Rate Packages · No Recurring Retainers
+                Transparent Pricing · No Unnecessary Complexity
               </span>
               <h2 className="mt-1 font-editorial text-3xl sm:text-4xl font-light uppercase text-white tracking-[0.03em]">
                 Website Packages &amp; Pricing
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Clear deliverables with zero hidden fees. Built with 100% code ownership.
+                Clear package starting prices in Indian Rupees (₹). Scope, delivery timeline, and
+                agreed inclusions confirmed before work begins.
               </p>
             </div>
 
-            {/* 3 Main Packages */}
+            {/* 3 Main Packages Grid */}
             <div className="grid gap-6 md:grid-cols-3 items-stretch">
-              {/* Essential */}
+              {/* Package 1: Essential */}
               <div className="rounded-2xl border border-white/15 bg-[#08122d]/70 p-6 flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-slate-400">FOUNDATION</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono uppercase text-slate-400">
+                      SMALL BUSINESSES
+                    </span>
+                  </div>
                   <h3 className="mt-1 font-editorial text-2xl font-light text-white uppercase">
                     ESSENTIAL
                   </h3>
-                  <p className="mt-3 font-editorial text-4xl font-light text-white">$200</p>
+                  <p className="mt-3 font-editorial text-4xl font-light text-white">₹9,999</p>
                   <p className="mt-1 text-xs font-mono text-emerald-400">
-                    50-50: $100 kickoff · $100 launch
+                    50% kickoff (₹5,000) · 50% launch
                   </p>
-                  <p className="mt-3 text-xs text-slate-300 font-light">
-                    For businesses needing a simple, professional online presence.
+                  <p className="mt-3 text-xs text-slate-300 font-light leading-relaxed">
+                    A clean, professional online presence for businesses ready to establish
+                    themselves online.
                   </p>
-                  <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
+                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Custom single-page responsive design</span>
+                      <span>Up to 3 pages or agreed scope</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Mobile-optimized digital menu &amp; pricing</span>
+                      <span>Customised visual design</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Location, hours &amp; Google Maps</span>
+                      <span>Mobile-responsive layout</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Domain setup &amp; SSL guidance</span>
+                      <span>Services or product showcase</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>14-day post-launch support</span>
+                      <span>Contact form &amp; WhatsApp link</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Google Maps integration</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Basic on-page SEO &amp; speed check</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Launch assistance &amp; handover</span>
                     </li>
                   </ul>
                 </div>
                 <button
                   onClick={() => {
                     onClose();
-                    onSelectPlan("Essential ($200)");
+                    onSelectPlan("Essential — ₹9,999");
                   }}
                   className="mt-6 w-full rounded-full border border-white/20 py-2.5 text-xs font-mono uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
                 >
-                  Select Essential →
+                  Choose Essential →
                 </button>
               </div>
 
-              {/* Signature (Featured) */}
+              {/* Package 2: Signature (Featured) */}
               <div className="rounded-2xl border border-white/35 bg-[#0a183d]/90 p-6 flex flex-col justify-between shadow-xl relative">
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-white text-slate-950 text-[9px] font-mono font-bold uppercase tracking-widest px-3 py-0.5">
-                  MOST POPULAR
+                  RECOMMENDED
                 </span>
                 <div>
                   <span className="text-[10px] font-mono uppercase text-slate-400">
-                    DISTINCTIVE
+                    GROWING BUSINESSES
                   </span>
                   <h3 className="mt-1 font-editorial text-2xl font-light text-white uppercase">
                     SIGNATURE
                   </h3>
-                  <p className="mt-3 font-editorial text-4xl font-light text-white">$500</p>
+                  <p className="mt-3 font-editorial text-4xl font-light text-white">₹19,999</p>
                   <p className="mt-1 text-xs font-mono text-emerald-400">
-                    50-50: $250 kickoff · $250 launch
+                    50% kickoff (₹10,000) · 50% launch
                   </p>
-                  <p className="mt-3 text-xs text-slate-300 font-light">
-                    For businesses wanting a more distinctive, customised website.
+                  <p className="mt-3 text-xs text-slate-300 font-light leading-relaxed">
+                    A more distinctive digital experience for businesses ready to strengthen their
+                    brand and customer journey.
                   </p>
-                  <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
+                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Everything in Essential, plus:</span>
+                      <span>Up to 5 pages or agreed scope</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Bespoke atmosphere tailored to your cuisine</span>
+                      <span>More extensive custom design</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Interactive category-based digital menu</span>
+                      <span>Enhanced layouts &amp; visual storytelling</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Reservation flow (Resy / OpenTable / direct)</span>
+                      <span>Interactive services/product catalog</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>1 Month included maintenance &amp; updates</span>
+                      <span>Enquiry &amp; WhatsApp integration</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Appointment/booking integration</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>On-page SEO across included pages</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Launch assistance &amp; handover</span>
                     </li>
                   </ul>
                 </div>
                 <button
                   onClick={() => {
                     onClose();
-                    onSelectPlan("Signature ($500)");
+                    onSelectPlan("Signature — ₹19,999");
                   }}
                   className="mt-6 w-full rounded-full bg-white py-2.5 text-xs font-bold tracking-wider uppercase text-slate-950 shadow-md hover:bg-slate-200 transition-colors"
                 >
-                  Select Signature →
+                  Choose Signature →
                 </button>
               </div>
 
-              {/* Experience */}
+              {/* Package 3: Premium */}
               <div className="rounded-2xl border border-white/15 bg-[#08122d]/70 p-6 flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] font-mono uppercase text-slate-400">FLAGSHIP</span>
+                  <span className="text-[10px] font-mono uppercase text-slate-400">
+                    ESTABLISHED &amp; PREMIUM
+                  </span>
                   <h3 className="mt-1 font-editorial text-2xl font-light text-white uppercase">
-                    EXPERIENCE
+                    PREMIUM
                   </h3>
-                  <p className="mt-3 font-editorial text-4xl font-light text-white">$800</p>
+                  <p className="mt-3 font-editorial text-4xl font-light text-white">₹59,999</p>
                   <p className="mt-1 text-xs font-mono text-emerald-400">
-                    50-50: $400 kickoff · $400 launch
+                    50% kickoff (₹30,000) · 50% launch
                   </p>
-                  <p className="mt-3 text-xs text-slate-300 font-light">
-                    For businesses requiring a more extensive design or additional functionality.
+                  <p className="mt-3 text-xs text-slate-300 font-light leading-relaxed">
+                    A bespoke website experience for businesses that need more sophisticated design,
+                    functionality, and flexibility.
                   </p>
-                  <ul className="mt-5 space-y-2 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
+                  <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-4 text-xs font-mono text-slate-300">
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Everything in Signature, plus:</span>
+                      <span>Custom project scope &amp; pages</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Multi-course tasting menus &amp; private dining</span>
+                      <span>Bespoke visual direction &amp; branding</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Ambient photography staging &amp; motion</span>
+                      <span>Advanced page layouts &amp; custom motion</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>Local SEO setup &amp; Google indexing</span>
+                      <span>Rich brand storytelling &amp; art direction</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                      <span>3 Months included maintenance</span>
+                      <span>Advanced booking or enquiry integration</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Content management options where fit</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>SEO &amp; performance optimization</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <span>Documented project handover</span>
                     </li>
                   </ul>
                 </div>
                 <button
                   onClick={() => {
                     onClose();
-                    onSelectPlan("Experience ($800)");
+                    onSelectPlan("Premium — ₹59,999");
                   }}
                   className="mt-6 w-full rounded-full border border-white/20 py-2.5 text-xs font-mono uppercase tracking-wider text-white hover:bg-white/10 transition-colors"
                 >
-                  Select Experience →
+                  Discuss a Premium Project →
                 </button>
               </div>
             </div>
 
-            {/* Optional Maintenance Plans */}
+            {/* Optional Monthly Care Plans */}
             <div className="border-t border-white/10 pt-8">
-              <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 block mb-4">
-                Optional Monthly Maintenance Plans
+              <span className="text-[11px] font-mono uppercase tracking-widest text-slate-400 block mb-2">
+                Your Website, Taken Care Of · Optional Ongoing Support
               </span>
+              <p className="text-xs text-slate-300 font-light mb-6">
+                Launching your website is only the beginning. Choose an optional care plan for
+                ongoing maintenance, small edits, and technical checks.
+              </p>
+
               <div className="grid gap-5 sm:grid-cols-2">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-5 flex flex-col justify-between">
+                <div className="rounded-xl border border-white/15 bg-white/5 p-5 flex flex-col justify-between">
                   <div>
-                    <h4 className="font-editorial text-xl font-light text-white uppercase">
+                    <span className="text-[10px] font-mono uppercase text-slate-400">
+                      ESSENTIAL SUPPORT
+                    </span>
+                    <h4 className="font-editorial text-xl font-light text-white uppercase mt-0.5">
                       BASIC CARE
                     </h4>
-                    <p className="mt-1 font-editorial text-2xl text-white">
-                      UP TO $150 <span className="text-xs font-mono text-slate-400">/ month</span>
+                    <p className="mt-2 font-editorial text-3xl text-white">
+                      ₹1,999 <span className="text-xs font-mono text-slate-400">/ month</span>
                     </p>
-                    <p className="mt-2 text-xs text-slate-300 font-light">
-                      Hosting, SSL, routine menu updates, price edits, and operating hours notice
-                      changes.
+                    <p className="mt-2 text-xs text-slate-300 font-light leading-relaxed">
+                      For businesses that need essential website maintenance and peace of mind.
                     </p>
+                    <ul className="mt-3 space-y-1.5 text-xs font-mono text-slate-300">
+                      <li>• Up to 2 small update requests / month</li>
+                      <li>• Up to 30 mins minor changes (unused time doesn't carry forward)</li>
+                      <li>• Minor text and image updates</li>
+                      <li>• Broken-link &amp; basic troubleshooting checks</li>
+                      <li>• Handled during normal business hours</li>
+                    </ul>
                   </div>
                   <button
                     onClick={() => {
                       onClose();
-                      onSelectPlan("Basic Care ($150/mo)");
+                      onSelectPlan("Monthly Website Care");
                     }}
-                    className="mt-4 text-xs font-mono text-white underline underline-offset-4 text-left"
+                    className="mt-5 text-xs font-mono text-white underline underline-offset-4 text-left"
                   >
-                    Select Basic Care →
+                    Choose Basic Care →
                   </button>
                 </div>
 
-                <div className="rounded-xl border border-white/20 bg-white/5 p-5 flex flex-col justify-between">
+                <div className="rounded-xl border border-white/25 bg-white/5 p-5 flex flex-col justify-between">
                   <div>
-                    <h4 className="font-editorial text-xl font-light text-white uppercase">
-                      PRIORITY CARE
+                    <span className="text-[10px] font-mono uppercase text-slate-400">
+                      HANDS-ON SUPPORT
+                    </span>
+                    <h4 className="font-editorial text-xl font-light text-white uppercase mt-0.5">
+                      PREMIUM CARE
                     </h4>
-                    <p className="mt-1 font-editorial text-2xl text-white">
-                      UP TO $300 <span className="text-xs font-mono text-slate-400">/ month</span>
+                    <p className="mt-2 font-editorial text-3xl text-white">
+                      ₹3,999 <span className="text-xs font-mono text-slate-400">/ month</span>
                     </p>
-                    <p className="mt-2 text-xs text-slate-300 font-light">
-                      Everything in Basic Care plus expedited same-day turnaround, Google Business
-                      upkeep, and direct phone access.
+                    <p className="mt-2 text-xs text-slate-300 font-light leading-relaxed">
+                      For businesses that want more frequent updates, visual support, and priority
+                      review.
                     </p>
+                    <ul className="mt-3 space-y-1.5 text-xs font-mono text-slate-300">
+                      <li>• Everything in Basic Care</li>
+                      <li>• Up to 5 small update requests / month</li>
+                      <li>• Up to 90 mins minor visual &amp; content updates</li>
+                      <li>• Priority support during business hours</li>
+                      <li>• Form-functionality &amp; SEO health reviews</li>
+                    </ul>
                   </div>
                   <button
                     onClick={() => {
                       onClose();
-                      onSelectPlan("Priority Care ($300/mo)");
+                      onSelectPlan("Monthly Website Care");
                     }}
-                    className="mt-4 text-xs font-mono text-white underline underline-offset-4 text-left"
+                    className="mt-5 text-xs font-mono text-white underline underline-offset-4 text-left"
                   >
-                    Select Priority Care →
+                    Choose Premium Care →
                   </button>
                 </div>
               </div>
-              <p className="mt-3 text-[10px] font-mono text-slate-500 italic">
-                *Exact maintenance update frequency depends on the selected written agreement. No
-                unlimited work promised.
-              </p>
+
+              {/* Pricing Rules & Disclaimers */}
+              <div className="mt-6 rounded-xl border border-white/10 bg-[#030714] p-4 text-[11px] font-mono text-slate-400 space-y-1.5">
+                <p>
+                  <strong>Important Note:</strong> Care plans cover maintenance and minor updates as
+                  described above. They do not include major redesigns, new page expansions beyond
+                  allowance, full e-commerce operations, or third-party advertising.
+                </p>
+                <p>
+                  Hosting, domain registration/renewals, paid third-party tools, and external
+                  booking subscriptions are charged separately unless expressly stated in your
+                  proposal. Final pricing always depends on agreed project scope.
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -282,50 +365,54 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
           <div className="space-y-8">
             <div>
               <span className="text-[11px] font-mono tracking-[0.25em] text-slate-400 uppercase">
-                Specialized Hospitality Studio
+                Tailored Digital Experiences
               </span>
               <h2 className="mt-1 font-editorial text-3xl sm:text-4xl font-light uppercase text-white tracking-[0.03em]">
-                All 7 Services
+                Websites Built Around Your Business
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Everything required to establish an effortless digital presence for your café,
-                bakery, or dining room.
+                Whether you’re starting small, growing your customer base, or building a premium
+                brand, SeeSites creates websites tailored to your goals.
               </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 {
-                  title: "Custom Café Websites",
-                  desc: "Tailored digital homes for independent cafés and coffee bars. Designed around your roast philosophy, space, and community vibe.",
+                  letter: "A",
+                  title: "Business Websites",
+                  desc: "Professional websites for local businesses, service providers, and independent professionals looking to establish authority and trust.",
                 },
                 {
-                  title: "Restaurant Website Design",
-                  desc: "Elevated, atmospheric layouts crafted to reflect your dining room, culinary direction, and seasonal dining experience.",
+                  letter: "B",
+                  title: "Salon & Beauty Websites",
+                  desc: "Elegant websites featuring treatment menus, transparent price lists, gallery lookbooks, stylist introductions, and appointment enquiries.",
                 },
                 {
-                  title: "Digital Menu Integration",
-                  desc: "Clean, lightning-fast digital menus that guests can effortlessly browse on any mobile device without downloading clunky PDFs.",
+                  letter: "C",
+                  title: "Restaurant & Café Websites",
+                  desc: "Websites featuring digital menus, food photography, operating hours, locations, and direct reservation or enquiry flows.",
                 },
                 {
-                  title: "Mobile-Responsive Layouts",
-                  desc: "Over 80% of dining patrons browse restaurants from their phones. We engineer every screen for fluid speed and effortless tap navigation.",
+                  letter: "D",
+                  title: "Boutique & Brand Websites",
+                  desc: "Beautiful digital storefronts for fashion labels, couture ateliers, jewellery businesses, and independent design studios.",
                 },
                 {
-                  title: "Website Redesigns",
-                  desc: "Transform outdated or slow websites into modern, conversion-focused assets that accurately match the quality of your food.",
+                  letter: "E",
+                  title: "Healthcare & Professional Websites",
+                  desc: "Clean, high-credibility websites for dental clinics, wellness centers, consultants, and specialised professional practices.",
                 },
                 {
-                  title: "Domain Setup & Deployment",
-                  desc: "End-to-end technical setup including custom domain connection, DNS configuration, and secure SSL certificates.",
+                  letter: "F",
+                  title: "Custom Website Solutions",
+                  desc: "Tailored designs, specialized calculators, booking forms, or multi-page experiences built strictly around your operational needs.",
                 },
-                {
-                  title: "Website Maintenance",
-                  desc: "Ongoing support for menu changes, seasonal price updates, holiday hours, and continuous technical health monitoring.",
-                },
-              ].map((svc, i) => (
+              ].map((svc) => (
                 <div key={svc.title} className="rounded-xl border border-white/10 bg-white/5 p-5">
-                  <span className="text-[10px] font-mono text-slate-400">0{i + 1} //</span>
+                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                    {svc.letter} // Service
+                  </span>
                   <h3 className="mt-1 font-editorial text-lg font-light text-white uppercase">
                     {svc.title}
                   </h3>
@@ -336,68 +423,61 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
               ))}
             </div>
 
-            <div className="pt-4 border-t border-white/10 flex justify-end">
+            <div className="rounded-xl border border-white/10 bg-[#030714] p-4 text-xs font-mono text-slate-400 flex items-center justify-between gap-4">
+              <p>
+                In a different industry? We design custom websites for all types of ambitious
+                businesses across India.
+              </p>
               <button
                 onClick={() => {
                   onClose();
-                  onSelectPlan("Signature ($500)");
+                  onSelectPlan("Not Sure Yet");
                 }}
-                className="metallic-btn-primary rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-950"
+                className="metallic-btn-primary shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider text-slate-950"
               >
-                Inquire About A Project →
+                Inquire Now →
               </button>
             </div>
           </div>
         )}
 
-        {/* ===================== PROCESS & 50/50 RULE MODAL ===================== */}
+        {/* ===================== PROCESS & PAYMENT TERMS MODAL ===================== */}
         {type === "process" && (
           <div className="space-y-8">
             <div>
               <span className="text-[11px] font-mono tracking-[0.25em] text-emerald-400 uppercase">
-                Zero Risk · Milestone Protection
+                Clear Steps · Zero Guesswork
               </span>
               <h2 className="mt-1 font-editorial text-3xl sm:text-4xl font-light uppercase text-white tracking-[0.03em]">
-                What Happens After You Pay?
+                How It Works &amp; Payment Terms
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Projects generally begin with a 50% advance payment, with the remaining 50% due
-                before launch, subject to the written project agreement.
+                Simple, transparent collaboration from concept discussion to final handover.
               </p>
             </div>
 
-            {/* 5-Step Process */}
-            <div className="space-y-4">
+            {/* 4 Steps */}
+            <div className="space-y-3">
               {[
                 {
-                  step: "01",
-                  title: "Discovery & Requirements",
-                  desc: "We discuss your venue, cuisine, aesthetic vision, timeline, and menu. We confirm the scope and send a simple written project agreement.",
+                  step: "Step 1",
+                  name: "DISCUSS",
+                  desc: "We understand your business, target audience, brand goals, and specific website requirements. We confirm the exact deliverables in a clear proposal.",
                 },
                 {
-                  step: "02",
-                  title: "Kickoff & 50% Advance",
-                  desc: "To lock in your production slot and begin work, you submit a 50% advance deposit. You receive a simple onboarding checklist to send your menu, logo, and photos (or we provide curated high-res imagery).",
+                  step: "Step 2",
+                  name: "DESIGN",
+                  desc: "We create a tailored website concept and refine the agreed direction with your feedback, ensuring typography, palette, and layouts match your vision.",
                 },
                 {
-                  step: "03",
-                  title: "Design & Development (7–14 Days)",
-                  desc: "Sia personally designs and codes your website from scratch. We deploy to a private, password-protected staging URL so you can test it on your own smartphone and desktop.",
+                  step: "Step 3",
+                  name: "BUILD",
+                  desc: "We develop the approved design with clean, responsive code and test the website across modern smartphones, tablets, and desktop displays.",
                 },
                 {
-                  step: "04",
-                  title: "Review & Revisions",
-                  desc: "We walk through the prototype together and refine typography, menu items, images, and mobile spacing until you are 100% satisfied.",
-                },
-                {
-                  step: "05",
-                  title: "Final 50% Payment & Public Launch",
-                  desc: "Only after your complete review and final sign-off is the remaining 50% balance paid. We link your domain, enable SSL, submit to Google, and hand over 100% ownership.",
-                },
-                {
-                  step: "06",
-                  title: "Optional Ongoing Maintenance",
-                  desc: "Keep your site fresh with our Basic or Priority Care plans, or manage your site independently with zero locked-in contracts.",
+                  step: "Step 4",
+                  name: "LAUNCH",
+                  desc: "We help publish the website, provide the agreed administrative handover, ensure domain connection, and discuss optional ongoing care.",
                 },
               ].map((s) => (
                 <div
@@ -409,7 +489,7 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
                   </span>
                   <div>
                     <h3 className="font-editorial text-base sm:text-lg font-light text-white uppercase">
-                      {s.title}
+                      {s.name}
                     </h3>
                     <p className="mt-1 text-xs text-slate-300 font-light leading-relaxed">
                       {s.desc}
@@ -419,66 +499,121 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
               ))}
             </div>
 
-            <div className="rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-5 flex items-center justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold text-white">Ready to begin your project?</p>
-                <p className="text-[11px] text-slate-300">
-                  50% kickoff deposit · Private staging preview · Final 50% only on approval.
-                </p>
-              </div>
+            {/* Payment & Ownership Terms */}
+            <div className="rounded-2xl border border-white/15 bg-[#030714] p-5 sm:p-6 space-y-4">
+              <h4 className="font-editorial text-xl font-light text-white uppercase">
+                Simple, Transparent Project Terms
+              </h4>
+              <ul className="space-y-2 text-xs font-mono text-slate-300">
+                <li className="flex items-start gap-2">
+                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>50% Advance Payment:</strong> Required to schedule and begin your
+                    project.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>50% Final Payment:</strong> Payable prior to final launch or handover,
+                    as agreed in the written proposal.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Scope Confirmation:</strong> Project deliverables and revisions
+                    confirmed before work begins; out-of-scope requests quoted separately.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Client Access &amp; Handover:</strong> You receive administrative
+                    access, your website assets, and agreed documentation with zero proprietary
+                    lock-in.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Timelines:</strong> Standard projects take 7–21 business days, depending
+                    on scope, client feedback, and prompt supply of content.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="pt-2 flex justify-end">
               <button
                 onClick={() => {
                   onClose();
-                  onSelectPlan("Signature ($500)");
+                  onSelectPlan("Signature — ₹19,999");
                 }}
-                className="metallic-btn-primary shrink-0 rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider text-slate-950"
+                className="metallic-btn-primary rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-950"
               >
-                Start Project →
+                Start Your Project →
               </button>
             </div>
           </div>
         )}
 
-        {/* ===================== TRUST & FAQ MODAL ===================== */}
+        {/* ===================== FAQ MODAL ===================== */}
         {type === "faq" && (
           <div className="space-y-8">
             <div>
               <span className="text-[11px] font-mono tracking-[0.25em] text-slate-400 uppercase">
-                Legitimacy &amp; Client Questions
+                Common Questions &amp; Direct Answers
               </span>
               <h2 className="mt-1 font-editorial text-3xl sm:text-4xl font-light uppercase text-white tracking-[0.03em]">
-                Common Questions &amp; Studio Facts
+                Frequently Asked Questions
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Direct answers to the questions independent restaurant and café owners ask most.
+                Everything you need to know about working with SeeSites.
               </p>
             </div>
 
             <div className="space-y-4">
               {[
                 {
-                  q: "Is SeeSites a legitimate studio? Who will build my website?",
-                  a: "SeeSites is a dedicated boutique web-design studio operated directly by Sia. Unlike large agencies that hand your project off to junior freelancers or overseas contractors, you work directly 1-on-1 with Sia from your first email to post-launch. Every project is backed by a clear written agreement and direct communication via seesites0@gmail.com.",
+                  q: "1. How much does a website cost?",
+                  a: "Our website packages start at ₹9,999 for the Essential package, ₹19,999 for the Signature package, and ₹59,999 for the Premium package. Final pricing always depends on your agreed project scope, number of pages, and specific custom requirements.",
                 },
                 {
-                  q: "Can I see working examples before committing?",
-                  a: "Yes! In our Selected Work section, click 'Launch Concept Demo' on any of our concept projects (Luna, Noir, Mesa). You can interact with simulated live menus, mobile previews, table reservation flows, and operating hours to experience our design quality firsthand.",
+                  q: "2. How long does it take to build a website?",
+                  a: "Most standard projects take between 7 to 21 business days. Delivery timelines depend on project complexity, the speed of client feedback, and how quickly brand assets, text, and images are provided.",
                 },
                 {
-                  q: "What happens after I make the initial 50% payment?",
-                  a: "Your 50% deposit locks in your project kickoff date. Within 24 hours, you receive a clear 1-page onboarding guide where you can submit your menu, logo, and photos. Sia then designs and builds your custom website. Within 7–14 days, you receive a private live staging link to test and review on your own phone and laptop.",
+                  q: "3. Will my website work on mobile phones?",
+                  a: "Yes. Every website we build uses a mobile-first responsive architecture. We carefully test layouts across popular smartphones, tablets, and desktop resolutions to ensure seamless usability and fast loading everywhere.",
                 },
                 {
-                  q: "When is the remaining 50% payment due?",
-                  a: "The final 50% payment is due ONLY after you have reviewed your website, tested all pages, requested any revisions, and given your final written launch approval. You never pay the final balance until you are completely satisfied with the result.",
+                  q: "4. Can I update my website myself?",
+                  a: "This depends on your platform and setup. We provide appropriate administrative access and can implement user-friendly content editing options. We also provide clear documentation during handover so you know how to make minor updates.",
                 },
                 {
-                  q: "Who owns the website and code after launch?",
-                  a: "You do. You own 100% of your website, code, design assets, and domain. There is zero proprietary lock-in. If you ever decide to host elsewhere or hire another developer in the future, you have full freedom and complete file access.",
+                  q: "5. Will my website appear on Google?",
+                  a: "Every website includes foundational on-page SEO setup (proper title tags, meta descriptions, semantic headings, and search engine sitemap preparation). However, no responsible designer can guarantee specific #1 Google rankings or instant lead volumes, as rankings depend on ongoing search algorithms and competition.",
                 },
                 {
-                  q: "Do I have to sign up for monthly maintenance?",
-                  a: "No. Maintenance is 100% optional. If you just want a website built and want to handle minor updates yourself, you can do that with no recurring fees. If you prefer us to handle seasonal menu updates, price changes, and technical checks, our Basic and Priority Care plans are available anytime.",
+                  q: "6. Do I need to pay for hosting and a domain?",
+                  a: "Yes. Domain registration and hosting are standard ongoing costs of running any website on the internet. We help you choose the most reliable, cost-effective domain registrar and hosting provider, ensuring you own and control your domain.",
+                },
+                {
+                  q: "7. What happens after my website launches?",
+                  a: "Once launched, you own your website and can run it independently. If you want continued support with minor text updates, new images, or periodic checks, you can choose our optional Basic Care (₹1,999/mo) or Premium Care (₹3,999/mo) plan.",
+                },
+                {
+                  q: "8. Can you build a website for my type of business?",
+                  a: "Yes. While we highlight examples for salons, restaurants, boutiques, clinics, and interior design studios, SeeSites works with diverse businesses across India. We welcome custom inquiries for any growing or established brand.",
+                },
+                {
+                  q: "9. Will I have access to my website?",
+                  a: "Absolutely. We believe business owners should maintain control. You receive agreed administrative access, website content and assets, and clear handover documentation, subject to chosen platform terms.",
+                },
+                {
+                  q: "10. Can I request changes after launch?",
+                  a: "Yes. Minor updates like fixing a phone number or updating a product price are covered if you are on an active care plan. Larger changes, such as adding new sections or new pages, can be quoted as a separate project.",
                 },
               ].map((item, idx) => (
                 <div key={idx} className="rounded-xl border border-white/10 bg-white/5 p-5">
@@ -496,12 +631,114 @@ export function InfoModal({ type, onClose, onSelectPlan }: InfoModalProps) {
               <button
                 onClick={() => {
                   onClose();
-                  onSelectPlan("Signature ($500)");
+                  onSelectPlan("Signature — ₹19,999");
                 }}
                 className="metallic-btn-primary rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-slate-950"
               >
-                Get In Touch With Sia →
+                Discuss Your Website →
               </button>
+            </div>
+          </div>
+        )}
+
+        {/* ===================== TERMS MODAL ===================== */}
+        {type === "terms" && (
+          <div className="space-y-6 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+            <div>
+              <span className="text-[11px] font-mono tracking-[0.25em] text-slate-400 uppercase">
+                Legal &amp; Project Terms
+              </span>
+              <h2 className="mt-1 font-editorial text-3xl font-light uppercase text-white tracking-[0.03em]">
+                Terms of Service
+              </h2>
+            </div>
+            <p>
+              These Terms of Service govern website design and development services provided by
+              SeeSites to clients across India and internationally.
+            </p>
+            <div className="space-y-4 font-mono text-xs text-slate-300">
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">
+                  1. Project Proposals &amp; Scope
+                </h4>
+                <p>
+                  All work begins following written agreement on project scope, price, and
+                  deliverables. Any requests beyond agreed specifications will be quoted separately.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">
+                  2. Payments &amp; Milestones
+                </h4>
+                <p>
+                  Standard projects require a 50% non-refundable advance payment to secure
+                  scheduling. The final 50% balance is due prior to final public deployment and
+                  asset handover.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">
+                  3. Client Content &amp; Approvals
+                </h4>
+                <p>
+                  Clients are responsible for providing brand assets, text, photography, and
+                  accurate business information. Timelines are subject to prompt client reviews and
+                  feedback.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">
+                  4. Hosting &amp; External Services
+                </h4>
+                <p>
+                  Third-party fees (domains, cloud hosting, paid software subscriptions) are the
+                  client’s responsibility unless specifically bundled into the written contract.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ===================== PRIVACY MODAL ===================== */}
+        {type === "privacy" && (
+          <div className="space-y-6 text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+            <div>
+              <span className="text-[11px] font-mono tracking-[0.25em] text-slate-400 uppercase">
+                Client Confidentiality
+              </span>
+              <h2 className="mt-1 font-editorial text-3xl font-light uppercase text-white tracking-[0.03em]">
+                Privacy Policy
+              </h2>
+            </div>
+            <p>
+              SeeSites is committed to safeguarding your privacy and respecting the confidentiality
+              of your business ideas, contact information, and assets.
+            </p>
+            <div className="space-y-4 font-mono text-xs text-slate-300">
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">Information Collected</h4>
+                <p>
+                  We only collect information voluntarily submitted via our project enquiry forms
+                  (such as your name, business name, email address, phone number, and project
+                  notes).
+                </p>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">Use of Information</h4>
+                <p>
+                  We use your contact details solely to evaluate your project, respond to your
+                  inquiry, and deliver our design and development services. We never sell, rent, or
+                  trade your data.
+                </p>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-white/5">
+                <h4 className="text-white font-bold mb-1 uppercase">Security</h4>
+                <p>
+                  All inquiries are processed securely and stored behind protected database
+                  credentials with row-level security. For any privacy queries, contact
+                  seesites0@gmail.com.
+                </p>
+              </div>
             </div>
           </div>
         )}

@@ -78,13 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SeeSites — Premium Website Design Studio for Cafés & Restaurants" },
+      { title: "SeeSites — Custom Website Design & Development Studio | India" },
       {
         name: "description",
         content:
-          "Custom digital experiences for independent cafés, coffee shops, bakeries, and restaurants in the United States and Canada. Operated by Sia.",
+          "SeeSites creates custom-designed, high-converting websites for businesses across India — salons, restaurants, boutiques, clinics, and ambitious brands. Accessible flat rates starting at ₹9,999.",
       },
       { name: "author", content: "SeeSites" },
+      {
+        name: "keywords",
+        content:
+          "website design studio india, salon websites, boutique website design, clinic websites, restaurant website development, custom web design india, seesites",
+      },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
